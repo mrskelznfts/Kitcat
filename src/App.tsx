@@ -25,18 +25,30 @@ const Navbar = () => {
 };
 
 const Countdown = () => {
-  const [timeLeft, setTimeLeft] = useState({ days: 3, hours: 21, minutes: 27, seconds: 55 });
+  // Set target to 2 days and 20 hours from the current moment of implementation
+  // Target: 2026-04-30T21:59:24 (approx based on current local time)
+  const targetDate = new Date("2026-04-30T21:59:24Z").getTime();
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0) return { ...prev, minutes: prev.minutes - 1, seconds: 59 };
-        if (prev.hours > 0) return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        if (prev.days > 0) return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
-        return prev;
-      });
-    }, 1000);
+    const calculateTime = () => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+          minutes: Math.floor((difference / 1000 / 60) % 60),
+          seconds: Math.floor((difference / 1000) % 60)
+        });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+      }
+    };
+
+    calculateTime();
+    const timer = setInterval(calculateTime, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -75,7 +87,7 @@ const Hero = () => {
           911 KitCats ready to snap into an AI-powered system where NFTs, tokens, and gameplay connect.
         </p>
         <div className="flex flex-col items-center mt-12">
-          <span className="text-[10px] font-bold tracking-[0.4em] text-white/80 mb-4 uppercase">SNAP STARTS IN</span>
+          <span className="text-[10px] font-bold tracking-[0.4em] text-white/80 mb-4 uppercase">MINT LIVE IN</span>
           <Countdown />
         </div>
       </motion.div>
