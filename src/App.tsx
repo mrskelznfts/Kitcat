@@ -80,20 +80,6 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      <motion.div 
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.8 }}
-        className="mt-20 relative group"
-      >
-        <div className="absolute inset-0 bg-white/20 rounded-[40px] blur-3xl group-hover:bg-white/30 transition-all duration-500" />
-        <img 
-          src="https://picsum.photos/seed/kitcat-red/800/800" 
-          alt="KitCat Character" 
-          className="relative w-full max-w-md rounded-[40px] border-8 border-white shadow-2xl"
-          referrerPolicy="no-referrer"
-        />
-      </motion.div>
     </section>
   );
 };
@@ -155,7 +141,7 @@ const Story = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8 leading-tight text-white">
-            SNAP INTO THE <span className="underline decoration-white underline-offset-8">SYSTEM</span>
+            SNAP INTO THE SYSTEM
           </h2>
           <div className="space-y-6 text-white/90 text-lg leading-relaxed">
             <p>
